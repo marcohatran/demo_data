@@ -24,14 +24,14 @@ def assign_sales():
 # Create Kafka consumer and producer
 consumer = KafkaConsumer(
     'poc_event_dropoff',
-    bootstrap_servers=[],
-    auto_offset_reset='latest',
+    bootstrap_servers=['10.100.21.136:9092', '10.100.21.137:9092', '10.100.21.139:9092'],
+    auto_offset_reset='earliest',
     enable_auto_commit=True,
-    group_id='sales_assign_group'
+    group_id='sales_assign_lead_new_new_group_2'
 )
 
 producer = KafkaProducer(
-    bootstrap_servers=[],
+    bootstrap_servers=['10.100.21.136:9092', '10.100.21.137:9092', '10.100.21.139:9092'],
     value_serializer=lambda v: json.dumps(v).encode('utf-8')
 )
 
@@ -63,5 +63,5 @@ for message in consumer:
         }
 
         # Send the result to the lead topic
-        producer.send('poc_create_lead_topic', value=result_payload)
+        producer.send('poc_lead_create_topic', value=result_payload)
         print(f"Sent lead: {result_payload}")

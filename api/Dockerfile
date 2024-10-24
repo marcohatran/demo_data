@@ -5,12 +5,12 @@ FROM python:3.9-slim
 WORKDIR /app
 
 # Install dependencies
-RUN pip install streamlit requests
+RUN pip install fastapi uvicorn asyncpg psycopg2-binary
 
 # Copy the application code
 COPY . .
 
-EXPOSE 8501
+EXPOSE 8000
 
 # Run the application
-CMD ["streamlit", "run", "realtime_dashboard.py"]
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]

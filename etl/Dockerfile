@@ -5,12 +5,9 @@ FROM python:3.9-slim
 WORKDIR /app
 
 # Install dependencies
-RUN pip install streamlit requests
+RUN pip install psycopg2-binary kafka-python
 
 # Copy the application code
 COPY . .
 
-EXPOSE 8501
-
-# Run the application
-CMD ["streamlit", "run", "realtime_dashboard.py"]
+CMD ["python", "app.py"]
