@@ -5,7 +5,7 @@ FROM python:3.9-slim
 WORKDIR /app
 
 # Install dependencies
-RUN pip install streamlit requests
+RUN pip install streamlit requests streamlit_autorefresh pandas
 
 # Copy the application code
 COPY . .
